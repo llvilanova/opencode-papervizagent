@@ -60,6 +60,7 @@ export function createStylistAgent(): AgentConfig {
   return {
     description:
       "Refines figure descriptions with NeurIPS 2025 aesthetic standards using style guides",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "load-style-guide": true },
     prompt: SYSTEM_PROMPT,

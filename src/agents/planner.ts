@@ -28,6 +28,7 @@ export function createPlannerAgent(): AgentConfig {
   return {
     description:
       "Generates detailed figure descriptions from content and visual intent, using reference examples",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "retrieve-references": true },
     prompt: SYSTEM_PROMPT,

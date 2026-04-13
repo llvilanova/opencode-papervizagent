@@ -58,18 +58,44 @@ The orchestrator selects the mode automatically unless you specify one. `dev_ful
 
 ## Agents
 
-| Agent | Description |
-|-------|-------------|
-| `paperviz-orchestrator` | Main entry point — coordinates the pipeline, selects mode, enforces quality gates |
-| `paperviz-retriever` | Retrieves relevant reference examples from a candidate pool for few-shot learning |
-| `paperviz-planner` | Generates detailed figure descriptions from content and visual intent |
-| `paperviz-stylist` | Refines figure descriptions with NeurIPS 2025 aesthetic standards |
-| `paperviz-visualizer` | Generates images using code-based rendering or external image generation |
-| `paperviz-critic` | Critiques generated figures and provides revised descriptions for improvement |
-| `paperviz-vanilla` | Directly generates images without planning or styling steps |
-| `paperviz-polish` | Analyzes existing images against style guides and suggests improvements |
+| Agent | Task Type | Description |
+|-------|-----------|-------------|
+| `paperviz-orchestrator` | Complex reasoning, multi-step planning, delegation | Reads user inputs, selects pipeline mode, delegates to sub-agents, enforces quality gates |
+| `paperviz-retriever` | Analytical ranking, long-context comprehension | Selects top-10 reference examples from a ~200-candidate pool by matching research domain and visual intent |
+| `paperviz-planner` | Detailed technical writing, few-shot learning | Produces exhaustive figure descriptions (layout, colors, data mappings) from methodology text and reference examples |
+| `paperviz-stylist` | Aesthetic refinement, guideline application | Refines figure descriptions to meet NeurIPS 2025 style standards while preserving existing quality |
+| `paperviz-visualizer` | Code generation, tool use | Generates rendering code (matplotlib, Mermaid, TikZ, SVG, Graphviz) or invokes image generation tools |
+| `paperviz-critic` | Visual evaluation, structured critique | Compares generated images against source material for accuracy, then produces a revised description |
+| `paperviz-vanilla` | End-to-end generation, code + aesthetics | Single-agent path that reads source material and directly produces a rendered image |
+| `paperviz-polish` | Image analysis, concise critique | Analyzes existing images against style guides and outputs actionable improvement suggestions |
 
 Only `paperviz-orchestrator` is visible in the agent list. All others are hidden sub-agents.
+
+## Model Configuration
+
+All agents inherit your default model. You can override individual agents in `opencode.json` using the `"provider/model"` format:
+
+```json
+{
+  "agent": {
+    "paperviz-orchestrator": { "model": "anthropic/claude-opus-4-20250514" },
+    "paperviz-visualizer": { "model": "anthropic/claude-sonnet-4-20250514" }
+  }
+}
+```
+
+Recommended model tiers by agent task type:
+
+| Agent | Task Type | Recommended Tier |
+|-------|-----------|-----------------|
+| `paperviz-orchestrator` | Complex reasoning, delegation | Strongest available |
+| `paperviz-visualizer` | Code generation, tool use | Strong coding model |
+| `paperviz-vanilla` | End-to-end generation | Strong coding model |
+| `paperviz-critic` | Visual evaluation, critique | Mid-to-high |
+| `paperviz-planner` | Technical writing, few-shot | Mid-to-high |
+| `paperviz-stylist` | Aesthetic refinement | Mid-to-high |
+| `paperviz-retriever` | Analytical ranking | Default is fine |
+| `paperviz-polish` | Image analysis, concise critique | Default is fine |
 
 ## Tools
 

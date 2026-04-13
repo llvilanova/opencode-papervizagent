@@ -64,6 +64,7 @@ export function createVanillaAgent(): AgentConfig {
   return {
     description:
       "Directly generates images from content and visual intent without planning or styling steps",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "execute-matplotlib": true, "load-style-guide": true },
     prompt: SYSTEM_PROMPT,

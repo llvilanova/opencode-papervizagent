@@ -371,6 +371,7 @@ export function createOrchestratorAgent(): AgentConfig {
   return {
     description:
       "PaperVizAgent — Generate publication-quality academic paper diagrams and plots from any document",
+    mode: "all" as const,
     hidden: false,
     tools: {
       "execute-matplotlib": true,

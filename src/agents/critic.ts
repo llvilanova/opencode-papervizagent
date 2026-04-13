@@ -95,6 +95,7 @@ export function createCriticAgent(): AgentConfig {
   return {
     description:
       "Critiques generated figures and provides revised descriptions with specific improvement suggestions",
+    mode: "subagent" as const,
     hidden: true,
     prompt: SYSTEM_PROMPT,
   };

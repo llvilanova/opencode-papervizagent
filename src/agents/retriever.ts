@@ -149,6 +149,7 @@ export function createRetrieverAgent(): AgentConfig {
   return {
     description:
       "Retrieves relevant reference examples from a candidate pool for few-shot learning",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "retrieve-references": true },
     prompt: SYSTEM_PROMPT,

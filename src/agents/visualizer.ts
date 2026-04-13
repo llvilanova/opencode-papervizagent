@@ -40,6 +40,7 @@ export function createVisualizerAgent(): AgentConfig {
   return {
     description:
       "Generates images from detailed descriptions using code-based rendering or external image generation",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "execute-matplotlib": true, "load-style-guide": true },
     prompt: SYSTEM_PROMPT,

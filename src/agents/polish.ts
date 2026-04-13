@@ -25,6 +25,7 @@ export function createPolishAgent(): AgentConfig {
   return {
     description:
       "Polishes existing images by analyzing them against style guides and applying aesthetic improvements",
+    mode: "subagent" as const,
     hidden: true,
     tools: { "load-style-guide": true },
     prompt: SYSTEM_PROMPT,
