@@ -1,6 +1,8 @@
 # PaperVizAgent Plugin for OpenCode
 
-An OpenCode plugin that runs a multi-agent pipeline to generate publication-quality diagrams and plots from academic papers.
+An OpenCode plugin that runs a multi-agent pipeline to generate publication-quality diagrams and plots from academic papers, inspired by the PaperVizAgent paper [1].
+
+[1] https://github.com/google-research/papervizagent
 
 ## Installation
 
