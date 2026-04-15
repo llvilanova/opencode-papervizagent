@@ -80,8 +80,9 @@ All agents inherit your default model. You can override individual agents in `op
 ```json
 {
   "agent": {
-    "paperviz-orchestrator": { "model": "anthropic/claude-opus-4-20250514" },
-    "paperviz-visualizer": { "model": "anthropic/claude-sonnet-4-20250514" }
+    "paperviz-orchestrator": { "model": "github-copilot/claude-opus-4.6", "variant": "max" },
+    "paperviz-visualizer": { "model": "github-copilot/claude-sonnet-4.6", "variant": "medium" },
+    ...
   }
 }
 ```
