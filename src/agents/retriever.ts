@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot retrieval task. Follow the appropriate instructions below.
 
@@ -145,13 +145,12 @@ Provide your output strictly in the following JSON format, containing only the *
 }
 \`\`\``;
 
-export function createRetrieverAgent(): AgentConfig {
+export function createRetrieverAgent(): AgentDefaults {
   return {
     description:
       "Retrieves relevant reference examples from a candidate pool for few-shot learning",
     mode: "subagent" as const,
     hidden: true,
-    tools: { "retrieve-references": true },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }

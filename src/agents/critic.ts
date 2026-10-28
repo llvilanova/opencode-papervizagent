@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot critique task. Follow the appropriate instructions below.
 
@@ -91,12 +91,12 @@ Provide your response strictly in the following JSON format.
 }
 \`\`\``;
 
-export function createCriticAgent(): AgentConfig {
+export function createCriticAgent(): AgentDefaults {
   return {
     description:
       "Critiques generated figures and provides revised descriptions with specific improvement suggestions",
     mode: "subagent" as const,
     hidden: true,
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }

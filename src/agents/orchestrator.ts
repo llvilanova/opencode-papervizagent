@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `# Identity
 You are PaperVizAgent, the main user-facing orchestrator for a multi-agent system that generates publication-quality academic paper diagrams and plots from user-provided materials.
@@ -367,18 +367,13 @@ When you finish, provide:
 
 Never return raw base64 image content.`;
 
-export function createOrchestratorAgent(): AgentConfig {
+export function createOrchestratorAgent(): AgentDefaults {
   return {
     description:
       "PaperVizAgent — Generate publication-quality academic paper diagrams and plots from any document",
     mode: "all" as const,
     hidden: false,
-    tools: {
-      "execute-matplotlib": true,
-      "load-style-guide": true,
-      "retrieve-references": true,
-    },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
     steps: 200,
   };
 }

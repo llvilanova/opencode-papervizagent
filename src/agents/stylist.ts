@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot styling task. Follow the appropriate instructions below.
 
@@ -56,13 +56,12 @@ Your task is to refine and enrich this description based on the provided [NeurIP
 ## OUTPUT
 Output ONLY the final polished Detailed Description. Do not include any conversational text or explanations.`;
 
-export function createStylistAgent(): AgentConfig {
+export function createStylistAgent(): AgentDefaults {
   return {
     description:
       "Refines figure descriptions with NeurIPS 2025 aesthetic standards using style guides",
     mode: "subagent" as const,
     hidden: true,
-    tools: { "load-style-guide": true },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }

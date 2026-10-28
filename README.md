@@ -6,13 +6,15 @@ An OpenCode plugin that runs a multi-agent pipeline to generate publication-qual
 
 ## Installation
 
-Add to your `opencode.json`:
+Requires OpenCode 2. Add the plugin directory to your `opencode.json`:
 
 ```json
 {
-  "plugin": ["opencode-papervizagent"]
+  "plugins": ["/path/to/opencode-papervizagent"]
 }
 ```
+
+OpenCode loads `src/index.ts` directly, so no build step is needed.
 
 ## Python Dependencies
 
@@ -75,17 +77,19 @@ Only `paperviz-orchestrator` is visible in the agent list. All others are hidden
 
 ## Model Configuration
 
-All agents inherit your default model. You can override individual agents in `opencode.json` using the `"provider/model"` format:
+All agents inherit your default model. You can override individual agents in `opencode.json` using the `"provider/model#variant"` format:
 
 ```json
 {
-  "agent": {
-    "paperviz-orchestrator": { "model": "github-copilot/claude-opus-4.6", "variant": "max" },
-    "paperviz-visualizer": { "model": "github-copilot/claude-sonnet-4.6", "variant": "medium" },
+  "agents": {
+    "paperviz-orchestrator": { "model": "github-copilot/claude-opus-4.6#max" },
+    "paperviz-visualizer": { "model": "github-copilot/claude-sonnet-4.6#medium" },
     ...
   }
 }
 ```
+
+The legacy `agent` key with separate `model` and `variant` fields also works.
 
 Recommended model tiers by agent task type:
 

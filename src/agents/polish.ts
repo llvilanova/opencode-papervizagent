@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot suggestion task. Analyze the existing image against the style guide and provide improvement suggestions.
 
@@ -21,13 +21,12 @@ Directly list the suggestions. Do not use filler phrases like "Based on the styl
 If the plot is substantially compliant, output "No changes needed."
 `;
 
-export function createPolishAgent(): AgentConfig {
+export function createPolishAgent(): AgentDefaults {
   return {
     description:
       "Polishes existing images by analyzing them against style guides and applying aesthetic improvements",
     mode: "subagent" as const,
     hidden: true,
-    tools: { "load-style-guide": true },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }

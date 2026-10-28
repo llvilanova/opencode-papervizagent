@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot planning task. Follow the appropriate instructions below.
 
@@ -24,13 +24,12 @@ To help you understand the task better, and grasp the principles for generating 
 ** IMPORTANT: **
 Your description should be as detailed as possible. For content, explain the precise mapping of variables to visual channels (x, y, hue) and explicitly enumerate every raw data point's coordinate to be drawn to ensure accuracy. For presentation, specify the exact aesthetic parameters, including specific HEX color codes, font sizes for all labels, line widths, marker dimensions, legend placement, and grid styles. You should learn from the examples' content presentation and aesthetic design (e.g., color schemes).`;
 
-export function createPlannerAgent(): AgentConfig {
+export function createPlannerAgent(): AgentDefaults {
   return {
     description:
       "Generates detailed figure descriptions from content and visual intent, using reference examples",
     mode: "subagent" as const,
     hidden: true,
-    tools: { "retrieve-references": true },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }

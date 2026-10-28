@@ -11,6 +11,15 @@ export type TaskType = "diagram" | "plot";
 
 export type StyleGuideType = "diagram" | "plot" | "rendering";
 
+/** Plugin-owned fields of an agent; model and variant come from the user's opencode.json. */
+export interface AgentDefaults {
+  description: string;
+  mode: "primary" | "subagent" | "all";
+  hidden: boolean;
+  system: string;
+  steps?: number;
+}
+
 export type AgentName =
   | "paperviz-orchestrator"
   | "paperviz-retriever"

@@ -1,4 +1,4 @@
-import type { AgentConfig } from "@opencode-ai/sdk";
+import type { AgentDefaults } from "../types";
 
 const SYSTEM_PROMPT = `You will be told whether this is a diagram or plot visualization task. Follow the appropriate instructions below.
 
@@ -36,13 +36,12 @@ When using code-based rendering, always save the source code file next to the re
 ### Format Conversion
 If format conversion is needed (e.g., SVG→PNG), use CLI tools directly. Never rasterize vector formats unless the user explicitly requests a raster format.`;
 
-export function createVisualizerAgent(): AgentConfig {
+export function createVisualizerAgent(): AgentDefaults {
   return {
     description:
       "Generates images from detailed descriptions using code-based rendering or external image generation",
     mode: "subagent" as const,
     hidden: true,
-    tools: { "execute-matplotlib": true, "load-style-guide": true },
-    prompt: SYSTEM_PROMPT,
+    system: SYSTEM_PROMPT,
   };
 }
